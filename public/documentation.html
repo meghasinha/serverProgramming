@@ -40,7 +40,7 @@
     <tbody>
       <tr>
         <td>Get list of all movies</td>
-        <td>/user/movies</td>
+        <td>/movies</td>
         <td>GET</td>
         <td>None</td>
         <td>JSON object holding data about all movies</td>
@@ -48,7 +48,7 @@
       <tr>
         <td>Get single movie by title </td>
         <td>
-          /movies/[title]]<br>
+          /movies/[title]<br>
           <br>
           Example by title:<br>
           /movies/:3idiots<br>
@@ -60,7 +60,7 @@
         </td>
         <tr>
           <td> Get movie description by the genre</td>
-          <td>/movies/genres/:genre'<br>
+          <td>/movies/genres/:genre<br>
             Example:<br>
             /movies/genres/drama
           </td>
@@ -71,10 +71,10 @@
       <tr>
         <td>Get data of director by name</td>
         <td>
-          /directors/[name]<br>
+          /directors/:name<br>
           <br>
           Example:<br>
-          /directors/Raju Hirani
+          /directors/Nora Ephron
         </td>
         <td>GET</td>
         <td>None</td>

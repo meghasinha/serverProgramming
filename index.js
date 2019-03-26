@@ -130,8 +130,8 @@ app.delete('/movies/:Title',passport.authenticate('jwt', {session:false}),functi
 //Add a new user tpo the list
 app.post('/users',function(req,res)
 {
-  req.checkBody('Username', 'Username is required').notEmpty();
-  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
+  req.checkBody('Name', 'Username is required').notEmpty();
+  req.checkBody('Name', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
   req.checkBody('Password', 'Password is required').notEmpty();
   req.checkBody('Email', 'Email is required').notEmpty();
   req.checkBody('Email', 'Email does not appear to be valid').isEmail();
@@ -143,17 +143,17 @@ app.post('/users',function(req,res)
     return res.status(422).json({ errors: errors });
   }
   var hashPassword= Users.hashPassword(req.body.Password);
-  Users.findOne({Username:req.body.Username})
+  Users.findOne({Name:req.body.Name})
   .then(function(user)
   {
     if(user)
     {
-      return res.status(400).send(req.body.Username +"already exists");
+      return res.status(400).send(req.body.Name +"already exists");
     }
     else
     {
       Users.create({
-    Username:req.body.Username,
+    Name:req.body.Name,
       Password:req.body.Password,
       Email:req.body.Email,
       Birthday:req.body.Birthday

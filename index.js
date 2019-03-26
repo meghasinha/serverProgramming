@@ -25,7 +25,9 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 
 //connect to mongodB
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
+
+mongoose.connect('mongodb+srv://myFlixDBadmin:vijayant@174@cluster0-u54mz.mongodb.net/myFlixDB?retryWrites=true');
 
 //return json object of movie to user
 app.get('/movies',passport.authenticate('jwt', { session:false}), function(req,res)

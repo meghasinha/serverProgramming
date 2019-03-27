@@ -27,7 +27,7 @@ app.use(morgan('common'));
 //connect to mongodB
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true});
 
-mongoose.connect('mongodb+srv://myFlixDBadmin:vijayant@174@cluster0-u54mz.mongodb.net/myFlixDB?retryWrites=true');
+mongoose.connect('mongodb+srv://myFlixDBadmin:vijayant@174@cluster0-u54mz.mongodb.net/myFlixDB?retryWrites=true',{useNewUrlParser: true});
 
 //return json object of movie to user
 app.get('/movies',passport.authenticate('jwt', { session:false}), function(req,res)
@@ -153,7 +153,7 @@ app.post('/users',function(req,res)
     else
     {
       Users.create({
-    Username:req.body.Username,
+      Username:req.body.Username,
       Password:req.body.Password,
       Email:req.body.Email,
       Birthday:req.body.Birthday

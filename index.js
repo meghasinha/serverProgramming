@@ -131,7 +131,7 @@ app.delete('/movies/:Title',passport.authenticate('jwt', {session:false}),functi
 app.post('/users',function(req,res)
 {
   req.checkBody('Username', 'Username is required').notEmpty();
-  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
+  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
   req.checkBody('Password', 'Password is required').notEmpty();
   req.checkBody('Email', 'Email is required').notEmpty();
   req.checkBody('Email', 'Email does not appear to be valid').isEmail();
@@ -174,7 +174,7 @@ app.post('/users',function(req,res)
 app.put('/users/:Username',passport.authenticate('jwt',{session:false}), function(req,res)
 {
   req.checkBody('Username', 'Username is required').notEmpty();
-  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
+  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
   req.checkBody('Password', 'Password is required').notEmpty();
   req.checkBody('Email', 'Email is required').notEmpty();
   req.checkBody('Email', 'Email does not appear to be valid').isEmail();

@@ -12,6 +12,7 @@ const validator= require('express-validator');
 require('./passport');
 //encapsulate express functionality
 const app= express();
+app.use(bodyParser.json());
 var auth = require('./auth')(app);
 app.use(cors());
 app.use(validator());
@@ -20,7 +21,7 @@ app.use(validator());
 const Movies= Model.Movie;
 const Users= Model.User;
 
-app.use(bodyParser.json());
+
 app.use(express.static('public'));
 app.use(morgan('common'));
 
@@ -154,7 +155,7 @@ app.post('/users',function(req,res)
     {
       Users.create({
       Username:req.body.Username,
-      Password:req.body.Password,
+      Password:hashPassword,
       Email:req.body.Email,
       Birthday:req.body.Birthday
       })
@@ -289,5 +290,5 @@ app.get('/', function(req, res)
  var port=process.env.PORT || 3000;
  //listen for request
  app.listen(port, "0.0.0.0", function() {
- console.log("Listening on Port 3000");
+ console.log(`Listening on Port ${port}`);
  });

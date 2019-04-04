@@ -15,6 +15,8 @@ const app= express();
 app.use(bodyParser.json());
 var auth = require('./auth')(app);
 app.use(cors());
+
+
 app.use(validator());
 
 //assign the modules
@@ -31,7 +33,7 @@ app.use(morgan('common'));
 mongoose.connect('mongodb+srv://myFlixDBadmin:vijayant@174@cluster0-u54mz.mongodb.net/myFlixDB?retryWrites=true',{useNewUrlParser: true});
 
 //return json object of movie to user
-app.get('/movies',passport.authenticate('jwt', { session:false}), function(req,res)
+app.get('/movies', function(req,res)
 {
   Movies.find()
   .then (function(movies)

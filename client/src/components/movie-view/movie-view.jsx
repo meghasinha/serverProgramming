@@ -1,5 +1,8 @@
 //importing required modules
 import React from 'react';
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 //export components
 export class MovieView extends React.Component {
@@ -39,3 +42,7 @@ export class MovieView extends React.Component {
    );
  }
 }
+MovieView.propTypes = {
+   movie: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
+ };

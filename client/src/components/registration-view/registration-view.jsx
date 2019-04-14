@@ -3,12 +3,13 @@ import styles from './registration-view.scss';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
 
 export function RegistrationView(props) {
+
   const [email, setEmail] = useState('');
   const [username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-
 
   const handleSubmit = () => {
     console.log(email,username, password);
@@ -17,36 +18,33 @@ export function RegistrationView(props) {
   };
 
   return (
-    <div>
-      <div className = "pull-right">Myflix</div>
-    <form>
-    <h2 className="form-signin-heading"> Please register here </h2>
-
-    <div className="form-group">
-      <label>
-        Username:
-        <input type="text" placeholder = "Enter your username"value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      </div>
+  <div>
+    <div className = "pull-right">Myflix</div>
+    <Form>
+      <h2 className="form-signin-heading"> Please Register Here </h2>
       <div className="form-group">
-      <label>
-        Email address:
-        <input type="email"  placeholder = "Enter your Email"value={email} onChange={e => setEmail(e.target.value)} />
-      </label>
+        <Form.Group controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control size="sm" type="text" placeholder="Enter Username" />
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control  size="sm" type="email" placeholder="mail@example.com" />
+          <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control  size="sm" type="password" placeholder=" Enter Password" />
+        </Form.Group>
+        <Button variant="primary" type="submit">Submit</Button>
       </div>
-      <div className="form-group">
-      <label>
-        Password:
-        <input type="password" placeholder = "Enter your password"value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <div className="form-group">
-      </div>
-      <button type="button" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-      </div>
-    </form>
-    </div>
+    </Form>
+  </div>
   );
 }
+
 RegistrationView.propTypes = {
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

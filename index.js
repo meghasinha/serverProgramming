@@ -12,10 +12,9 @@ const validator= require('express-validator');
 require('./passport');
 //encapsulate express functionality
 const app= express();
+app.use(cors());
 app.use(bodyParser.json());
 var auth = require('./auth')(app);
-app.use(cors());
-
 
 app.use(validator());
 

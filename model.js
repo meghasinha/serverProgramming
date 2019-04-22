@@ -32,12 +32,12 @@ var userSchema=  mongoose.Schema({
 
 //function for actually hashing the password
 userSchema.statics.hashPassword = function(password) {
-  return bcrypt.hashSync( password, 10 );
+  return bcrypt.hashSync(password, 10);
 };
 
 //to compare the hashed password with submitted paasword
 userSchema.methods.validatePassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+  return bcrypt.compare(password, this.password);
 };
 
 //creating models

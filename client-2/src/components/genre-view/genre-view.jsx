@@ -10,28 +10,25 @@ export class GenreView extends React.Component {
 
   constructor() {
     super();
-
     this.state = {};
   }
 
   render() {
     const {genre} = this.props;
-
     if (!genre) return null;
-
     return (
       <div className="container">
-       <div className="row">
-       <div className="col">
-         <div className="label">Name</div>
-         <div className="value">{genre.Name}</div>
-         </div>
-         <div className="col">
-         <div className="label">Description</div>
-          <div className="value">{genre.Description}</div>
+        <div className="row">
+          <div className="col">
+            <div className="label">Name</div>
+            <div className="value">{genre.Name}</div>
           </div>
-       </div>
-       </div>
+          <div className="col">
+            <div className="label">Description</div>
+            <div className="value">{genre.Description}</div>
+          </div>
+        </div>
+      </div>
      );
    }
  }

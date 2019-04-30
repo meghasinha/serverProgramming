@@ -175,9 +175,10 @@ app.post('/users',function(req,res)
 //update the user information by user name
 app.put('/users/:Username',passport.authenticate('jwt',{session:false}), function(req,res)
 {
-
+  req.checkBody('Username', 'Username is required').notEmpty();
   req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
-
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('Email', 'Email is required').notEmpty();
   req.checkBody('Email', 'Email does not appear to be valid').isEmail();
 
   // check the validation object for errors
@@ -254,7 +255,7 @@ app.put('/users/:Name/:MovieID',passport.authenticate('jwt',{session:false}), fu
 //delete the user by user name
 app.delete('/users/:Name', passport.authenticate('jwt',{session:false}), function(req, res)
 {
-  Users.findOneAndRemove({ Name: req.body.Username })
+  Users.findOneAndRemove({ Name: req.params.Name })
   .then(function(user)
   {
     if (!user)

@@ -255,16 +255,16 @@ app.put('/users/:Name/:MovieID',passport.authenticate('jwt',{session:false}), fu
 //delete the user by user name
 app.delete('/users/:Name', passport.authenticate('jwt',{session:false}), function(req, res)
 {
-  Users.findOneAndRemove({ Name: req.body.Username }, function(){})
+  Users.findOneAndRemove({ Name: req.params.Name }, function(){})
   .then(function(user)
   {
     if (!user)
     {
-      res.status(400).send(req.body.Username + " was not found");
+      res.status(400).send(req.params.Name + " was not found");
     }
     else
     {
-      res.status(200).send(req.body.Username + " was deleted.");
+      res.status(200).send(req.params.Name + " was deleted.");
     }
   })
   .catch(function(err)

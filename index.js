@@ -211,9 +211,9 @@ app.put('/users/:Username',passport.authenticate('jwt',{session:false}), functio
 });
 
 //update the favorite movies in user list
-app.put('/users/:Name/movies/:MovieID',passport.authenticate('jwt', {session:false}), function(req, res)
+app.put('/users/:Username/movies/:MovieID',passport.authenticate('jwt', {session:false}), function(req, res)
 {
-  Users.findOneAndUpdate({ Name : req.params.Name }, {
+  Users.findOneAndUpdate({Username : req.params.Username }, {
   $push : { Movies : req.params.MovieID}
   },
   { new : true }, // This line makes sure that the updated document is returned
@@ -232,9 +232,9 @@ app.put('/users/:Name/movies/:MovieID',passport.authenticate('jwt', {session:fal
 });
 
 //remove the favorite movie from user list
-app.put('/users/:Name/:MovieID',passport.authenticate('jwt',{session:false}), function(req, res)
+app.put('/users/:Username/:MovieID',passport.authenticate('jwt',{session:false}), function(req, res)
 {
-  Users.findOneAndUpdate({ Name : req.params.Name }, {
+  Users.findOneAndUpdate({ Username : req.params.Username }, {
   $pull: { Movies : req.params.MovieID }
   },
   { new : true }, // This line makes sure that the updated document is returned
@@ -253,9 +253,9 @@ app.put('/users/:Name/:MovieID',passport.authenticate('jwt',{session:false}), fu
 });
 
 //delete the user by user name
-app.delete('/users/:Name', passport.authenticate('jwt',{session:false}), function(req, res)
+app.delete('/users/:Username', passport.authenticate('jwt',{session:false}), function(req, res)
 {
-  Users.findOneAndRemove({ Name: req.params.Name }, function(){})
+  Users.findOneAndRemove({ Username: req.params.Username }, function(){})
   .then(function(user)
   {
     if (!user)

@@ -21,26 +21,21 @@ const [ birthday, setBirthday] = useState('');
     let userName = localStorage.getItem('user');
     console.log(email,username, password, birthday,accessToken);
 
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(user) */
-
-    axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName, {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday },
-      { headers: { Authorization: `Bearer ${accessToken}`}})
+  axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName, {
+    Username: username,
+    Password: password,
+    Email: email,
+    Birthday: birthday },
+    { headers: { Authorization: `Bearer ${accessToken}`}})
     .then(response => {
-      const data = response.data;
-      console.log(data);
-      window.open('/');
+    const data = response.data;
+    console.log(data);
+    window.open('/');
     })
     .catch(e => {
-      console.log('error updating the user')
+    console.log('error updating the user')
     });
-
   };
-
 
   const onClick= (e) => {
     e.preventDefault();
@@ -48,8 +43,8 @@ const [ birthday, setBirthday] = useState('');
     let username = localStorage.getItem('user');
 
     axios.delete('https://mymovieflix.herokuapp.com/users/' + username,
-    { headers: { Authorization: `Bearer ${accessToken}`}},
-    {  params: { Username:username } }
+      { headers: { Authorization: `Bearer ${accessToken}`}},
+      {  params: { Username:username } }
     )
     .then(response => {
       const data = response.data;

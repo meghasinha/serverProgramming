@@ -16,8 +16,6 @@ export function RegistrationView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email,username, password, birthday);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(user) */
     axios.post('https://mymovieflix.herokuapp.com/users', {
       Username: username,
       Password: password,
@@ -32,7 +30,6 @@ export function RegistrationView(props) {
     .catch(e => {
       console.log('error registering the user')
     });
-
   };
 
   return (

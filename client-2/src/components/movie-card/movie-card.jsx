@@ -12,9 +12,6 @@ export class MovieCard extends React.Component {
     let accessToken = localStorage.getItem('token');
     let userName = localStorage.getItem('user');
     console.log(movie_id,accessToken);
-
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(user) */
     axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName +`/movies/`+movie_id,
       {params: {Name: userName, MovieID:movie_id }},
       { headers: { Authorization: `Bearer ${accessToken}`}})
@@ -25,26 +22,22 @@ export class MovieCard extends React.Component {
     .catch(e => {
       console.log('error updating the user')
     });
-
-
   }
-
 
   render() {
     const { movie} = this.props;
-
     return (
-      <Card style={{width:'16rem'}}>
-      <Card.Img variant="top" src={movie.ImagePath}/>
-      <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
-        <Link to={`/movies/${movie._id}`}>
-        <Button  variant="link">Open</Button>
-        </Link>
+        <Card style={{width:'16rem'}}>
+        <Card.Img variant="top" src={movie.ImagePath}/>
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Description}</Card.Text>
+          <Link to={`/movies/${movie._id}`}>
+            <Button  variant="link">Open</Button>
+          </Link>
           <Button variant="link"  onClick={() => this.onClick(movie._id)}>Add to favourite</Button>
-      </Card.Body>
-      </Card>
+        </Card.Body>
+        </Card>
     );
   }
 }

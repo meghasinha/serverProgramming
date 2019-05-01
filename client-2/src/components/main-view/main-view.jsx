@@ -78,7 +78,6 @@ import Button from 'react-bootstrap/Button';
   });
 }
 
-
 render(){
     const{ movies, user} = this.state;
     const{ logOut } = this.props;

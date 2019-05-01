@@ -18,22 +18,21 @@ export class  ProfileView extends React.Component {
       const {userProfile} = this.props;
 
       return (
-        <div>
-          <p className="update"><Link to={`./update/${userProfile.Username}`}>Profile Update</Link></p>
-        <Card style={{ width: '18rem' }}>
-         <Card.Body>
-             <Card.Title>Username</Card.Title>
-             <Card.Text>{userProfile.Username}</Card.Text>
-             <Card.Title>Password</Card.Title>
-             <Card.Text>{userProfile.Password}</Card.Text>
-             <Card.Title>Email</Card.Title>
-             <Card.Text>{userProfile.Email}</Card.Text>
-             <Card.Title>Birthday</Card.Title>
-             <Card.Text>{userProfile.Birthday}</Card.Text>
+          <div>
+            <p className="update"><Link to={`./update/${userProfile.Username}`}>Profile Update</Link></p>
+            <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title>Username</Card.Title>
+              <Card.Text>{userProfile.Username}</Card.Text>
+              <Card.Title>Password</Card.Title>
+              <Card.Text>{userProfile.Password}</Card.Text>
+              <Card.Title>Email</Card.Title>
+              <Card.Text>{userProfile.Email}</Card.Text>
+              <Card.Title>Birthday</Card.Title>
+              <Card.Text>{userProfile.Birthday}</Card.Text>
             </Card.Body>
             </Card>
-
-            </div>
+          </div>
        );
      }
    }

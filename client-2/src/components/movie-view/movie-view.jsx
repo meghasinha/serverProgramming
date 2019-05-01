@@ -1,5 +1,6 @@
 //importing required modules
 import React from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
@@ -15,41 +16,30 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+
   render() {
     const { movie} = this.props;
 
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
-        <div className="movie-title">
-           <div className="label">Title</div>
-           <div className="value">{movie.Title}</div>
-         </div>
-         <div className="movie-description">
-           <div className="label">Description</div>
-           <div className="value">{movie.Description}</div>
-         </div>
-         <img className="movie-poster" src={movie.ImagePath}/>
-         <div className="movie-genre">
-           <div className="label">Genre</div>
-           <div className="value">{movie.Genre.Name}</div>
-         </div>
-         <div className="movie-director">
-           <div className="label">Director</div>
-           <div className="value">{movie.Director.Name}</div>
-         </div>
-         <Link to={`/directors/${movie.Director.Name}`}>
-          <Button variant="link">Director</Button>
-        </Link>
-       <Link to={`/genres/${movie.Genre.Name}`}>
-        <Button variant="link">Genre</Button>
-      </Link>
-     </div>
+      <Card style={{ width: '18rem' }}>
+      <Card.Body>
+         <Card.Title>Title</Card.Title>
+         <Card.Text>{movie.Title}</Card.Text>
+         <Card.Title>Description</Card.Title>
+         <Card.Text>{movie.Description}</Card.Text>
+         <Card.Title>Genre</Card.Title>
+         <Card.Text>{movie.Genre.Name}</Card.Text>
+         <Card.Title>Director</Card.Title>
+         <Card.Text>{movie.Director.Name}</Card.Text>
+         <Card.Link href={`/directors/${movie.Director.Name}`}>Director</Card.Link>
+          <Card.Link href={`/genres/${movie.Genre.Name}`}>Genre</Card.Link>
+        </Card.Body>
+        </Card>
+      
+
+
    );
  }
 }
-MovieView.propTypes = {
-   movie: PropTypes.string.isRequired,
-
- };

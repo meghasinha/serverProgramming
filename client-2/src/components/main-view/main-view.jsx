@@ -22,7 +22,8 @@ import Button from 'react-bootstrap/Button';
     super();
     this.state ={
       movies: [],
-      user:[]
+      user:[],
+      username: null
 
       };
   }
@@ -32,7 +33,7 @@ import Button from 'react-bootstrap/Button';
    let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        username: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
     }
@@ -43,7 +44,7 @@ import Button from 'react-bootstrap/Button';
      console.log(authData.user.Username);
 
      this.setState({
-        user: authData
+      user: authData
       });
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
@@ -85,14 +86,14 @@ render(){
     return (
     <Router>
       <div className="main-view"/>
-      <Route exact path="/" render={() =>  { if (user.length === 0) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      <Route exact path="/" render={() =>  { if ( user.length === 0 ) return <LoginView onLoggedIn={currentUser => this.onLoggedIn(currentUser)} />;
       return (
         <div>
         <div>
-          <Button onClick={() => this.logOut()} variant="link">Logout</Button>
+          <Button className="logOut" onClick={() => this.logOut()} variant="link">Logout</Button>
         </div>
           <Link to={`/users/${user.user.Username}`}>
-          <Button  className="profile" variant="info">Logged in as: {user.user.Username}</Button>
+          <Button  className="profile" variant="Primary">Profile</Button>
           </Link>
           <div>
             <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
@@ -116,17 +117,17 @@ render(){
         } />
 
         <Route path="/users/:username" render={({ match }) => {
-          if (user.length === 0) return <div className="main-view"/>;
+          if ( user.length=== 0) return <div className="main-view"/>;
           return (
             <div>
-              <Button onClick={() => this.logOut()} variant="link">Logout</Button>
+              <Button className="logOut"onClick={() => this.logOut()} variant="link">Logout</Button>
               <div>
               <ProfileView userProfile={user.user}/>
               </div>
             </div>
           );} }/>
 
-        <Route path="/users/update" render={({ match }) => {
+        <Route path="/users/update/:username" render={({ match }) => {
           if (user.length === 0) return <div className="main-view"/>;
           return <UpdateView/>} }/>
       </Router>

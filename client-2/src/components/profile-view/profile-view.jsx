@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import axios from 'axios';
+import styles from './profile-view.scss';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -17,25 +18,22 @@ export class  ProfileView extends React.Component {
       const {userProfile} = this.props;
 
       return (
-        <div className="profile-view">
-         <div className="username">
-           <div className="label">Username</div>
-           <div className="value">{userProfile.Username}</div>
-         </div>
-         <div className="user-password">
-           <div className="label">Password</div>
-           <div className="value">{userProfile.Password}</div>
-         </div>
-         <div className="user-email">
-           <div className="label">Email</div>
-           <div className="value">{userProfile.Email}</div>
-         </div>
-         <div className="user-birthday">
-           <div className="label">Birthday</div>
-           <div className="value">{userProfile.Birthday}</div>
-         </div>
-         <li><Link to="./update">profile update</Link></li>
-        </div>
+        <div>
+          <p className="update"><Link to={`./update/${userProfile.Username}`}>Profile Update</Link></p>
+        <Card style={{ width: '18rem' }}>
+         <Card.Body>
+             <Card.Title>Username</Card.Title>
+             <Card.Text>{userProfile.Username}</Card.Text>
+             <Card.Title>Password</Card.Title>
+             <Card.Text>{userProfile.Password}</Card.Text>
+             <Card.Title>Email</Card.Title>
+             <Card.Text>{userProfile.Email}</Card.Text>
+             <Card.Title>Birthday</Card.Title>
+             <Card.Text>{userProfile.Birthday}</Card.Text>
+            </Card.Body>
+            </Card>
+
+            </div>
        );
      }
    }

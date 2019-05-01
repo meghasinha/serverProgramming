@@ -20,24 +20,19 @@ export class DirectorView extends React.Component {
     if (!director) return null;
 
     return (
-      <div className="director-view">
-       <div className="director-name">
-         <div className="label">Name</div>
-         <div className="value">{director.Name}</div>
-       </div>
-       <div className="director-Biography">
-         <div className="label">Biography</div>
-         <div className="value">{director.Bio}</div>
-       </div>
-       <div className="director-Birth">
-         <div className="label">Birthday</div>
-         <div className="value">{director.Birth}</div>
-       </div>
-       <div className="movie-director">
-         <div className="label">Death</div>
-         <div className="value">{director.Death}</div>
-       </div>
-       </div>
+  <Card style={{ width: '18rem' }}>
+      <Card.Body>
+         <Card.Title>Director-Name</Card.Title>
+         <Card.Text>{director.Name}</Card.Text>
+         <Card.Title>Biography</Card.Title>
+         <Card.Text>{director.Bio}</Card.Text>
+         <Card.Title>Birthday</Card.Title>
+         <Card.Text>{director.Birth}</Card.Text>
+         <Card.Title>Death</Card.Title>
+         <Card.Text>{director.Death}</Card.Text>
+        </Card.Body>
+        </Card>
+
      );
    }
  }

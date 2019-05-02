@@ -1,11 +1,6 @@
 //importing required modules
 import React from 'react';
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
-import{ProfileView} from '../profile-view/profile-view';
 
 //export components
 export class MovieView extends React.Component {

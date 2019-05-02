@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import styles from './profile-view.scss';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import{UpdateView} from './update-view';
 
 export class  ProfileView extends React.Component {
     constructor() {

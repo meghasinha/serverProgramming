@@ -8,21 +8,41 @@ import { Link } from "react-router-dom";
 export class MovieCard extends React.Component {
 
   onClick(movie_id)
-  {
-    let accessToken = localStorage.getItem('token');
-    let userName = localStorage.getItem('user');
-    console.log(movie_id,accessToken);
-    axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName +`/movies/`+movie_id,
+    {
+      let accessToken = localStorage.getItem('token');
+      let userName = localStorage.getItem('user');
+      console.log(movie_id,accessToken);
+      axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName +`/movies/`+movie_id,
       {params: {Name: userName, MovieID:movie_id }},
       { headers: { Authorization: `Bearer ${accessToken}`}})
-    .then(response => {
+      .then(response => {
       const data = response.data;
       console.log(data);
-    })
-    .catch(e => {
+      alert('Added to favourite');
+      })
+      .catch(e => {
       console.log('error updating the user')
-    });
-  }
+      });
+    }
+
+
+  onClickHandle(movie_id)
+    {
+      let accessToken = localStorage.getItem('token');
+      let userName = localStorage.getItem('user');
+      console.log(movie_id,accessToken);
+      axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName +'/'+ movie_id,
+      {params: {Username: userName, MovieID:movie_id }},
+      { headers: { Authorization: `Bearer ${accessToken}`}})
+      .then(response => {
+      const data = response.data;
+      console.log(data);
+      alert('Removed from favourite');
+      })
+      .catch(e => {
+      console.log('error updating the user')
+      });
+    }
 
   render() {
     const { movie} = this.props;
@@ -36,6 +56,7 @@ export class MovieCard extends React.Component {
             <Button  variant="link">Open</Button>
           </Link>
           <Button variant="link"  onClick={() => this.onClick(movie._id)}>Add to favourite</Button>
+            <Button variant="link"  onClick={() => this.onClickHandle(movie._id)} >Remove from favourite</Button>
         </Card.Body>
         </Card>
     );

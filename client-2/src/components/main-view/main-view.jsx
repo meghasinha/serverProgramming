@@ -6,6 +6,7 @@ import styles from './main-view.scss';
 import{ MovieCard } from '../movie-card/movie-card';
 import{ MovieView } from '../movie-view/movie-view';
 import{LoginView} from '../login-view/login-view';
+//import{FavouriteView} from '../favourite-view/favourite-view';
 import{RegistrationView} from '../registration-view/registration-view';
 import{ProfileView} from '../profile-view/profile-view';
 import{DirectorView} from '../director-view/director-view';
@@ -92,8 +93,9 @@ render(){
           <Button className="logOut" onClick={() => this.logOut()} variant="link">Logout</Button>
         </div>
           <Link to={`/users/${user.user.Username}`}>
-          <Button  className="profile" variant="Primary">Profile</Button>
+            <Button  className="profile" variant="Primary">Profile</Button>
           </Link>
+
           <div>
             <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/>
           </div>
@@ -126,9 +128,10 @@ render(){
             </div>
           );} }/>
 
-        <Route path="/users/update/:username" render={({ match }) => {
+          <Route path="/users/update/:username" render={({ match }) => {
           if (user.length === 0) return <div className="main-view"/>;
           return <UpdateView/>} }/>
+          
       </Router>
     );
   }

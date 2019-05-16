@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 //import  {RegistrationView} from '../registration-view/registration-view';
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import styles from './login-view.scss';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -9,12 +9,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-export function LoginView(props) {
+export function LoginView(props)
+ {
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) =>
+  {
       e.preventDefault();
       /* Send a request to the server for authentication */
       axios.post('https://mymovieflix.herokuapp.com/login', {
@@ -27,12 +29,23 @@ export function LoginView(props) {
       })
       .catch(e => {
         console.log('no such user')
+        alert("Username and Password doesnot match ");
       });
     };
 
   return (
     <div>
-      <div className = "pull-right">MovieFlix</div>
+      <div className = "pull-right">
+        <p>
+          <span class="blue">M</span>
+          <span class="purple">y</span>
+          <span class="blue">F</span>
+          <span class="purple">l</span>
+          <span class="blue">i</span>
+          <span class="purple">X</span>
+          <img src={require('../../movie_logo.svg')} width="100" height="50"/>
+        </p>
+      </div>
       <form>
         <h2 className="form-signin-heading"> Please sign in </h2>
         <div className="form-group">

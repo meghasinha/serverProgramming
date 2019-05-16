@@ -13,8 +13,7 @@ export function RegistrationView(props) {
 
   const handleSubmit = () => {
     console.log(email,username, password);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(user) */
+    
   };
 
   return (

@@ -284,7 +284,7 @@ app.use(function (err, req, res, next)
 // default textual response
 app.get('/', function(req, res)
 {
-  res.send('Welcome to myMovie Flix');
+  res.send('Thanks for using MyFlix! Hope to see you again.');
 });
 
 //environment variable port

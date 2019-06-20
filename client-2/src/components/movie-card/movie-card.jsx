@@ -4,69 +4,106 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
+import './movie-card.scss';
+let toggleClick = false;
 
 export class MovieCard extends React.Component
 {
-  onClick(movie_id)
-  {
-    let accessToken = localStorage.getItem('token');
-    let userName = localStorage.getItem('user');
-    console.log(movie_id,accessToken);
-    axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName +`/movies/`+movie_id,
-    {params: {Name: userName, MovieID:movie_id }},
-    { headers: { Authorization: `Bearer ${accessToken}`}})
+  constructor(props) {
+      super(props);
+      this.state = {
+        fav: props.favorite
+        };
+        this.toggleClass = this.toggleClass.bind(this);
+      }
+      componentDidUpdate(prevProps) {
+        if (this.props.favorite !== prevProps.favorite) {
+        this.setState({
+        fav: this.props.favorite
+      })
+    }
+  }
+removeFromFavorites() {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    const movieId = this.props.movie._id
+    axios
+        .delete(`https://mymovieflix.herokuapp.com/users/${user}/movies/${movieId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` }
+          }
+        )
+        .then(response => {
+          console.log(response);
+          this.setState({
+            fav: false
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+  }
+
+
+addToFavorites(movieId) {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token')
+    axios
+    .post(`https://mymovieflix.herokuapp.com/users/${user}/movies/${movieId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    )
     .then(response => {
-    const data = response.data;
-    console.log(data);
-    alert('Added to favourite');
+      console.log(response);
+      this.setState({
+        fav: true
+      });
     })
     .catch(e => {
-    console.log('error updating the user')
+      console.log(e);
     });
-  }
+}
 
-  onClickHandle(movie_id)
-  {
-    let accessToken = localStorage.getItem('token');
-    let userName = localStorage.getItem('user');
-    console.log(movie_id,accessToken);
-    axios.put(`https://mymovieflix.herokuapp.com/users/`+ userName +'/'+ movie_id,
-    {params: {Username: userName, MovieID:movie_id }},
-    { headers: { Authorization: `Bearer ${accessToken}`}})
-    .then(response =>
-    {
-      const data = response.data;
-      console.log(data);
-      alert('Removed from favourite');
-    })
-    .catch(e =>
-     {
-       console.log('error updating the user')
-    });
-  }
+
+toggleClass() {
+   toggleClick = true;
+   if (!this.state.fav) {
+     this.addToFavorites(this.props.movie._id);
+   } else {
+     this.removeFromFavorites();
+   }
+}
 
   render()
-    {
-      const { movie} = this.props;
-      return (
-        <Card style={{width:'16rem'}}>
-        <Card.Img variant="top" src={movie.ImagePath}/>
-        <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
-        <Link to={`/movies/${movie._id}`}>
-        <Button  variant="link">Open</Button>
-        </Link>
-        <Button variant="link"  onClick={() => this.onClick(movie._id)}>Add to favourite</Button>
-        <Button variant="link"  onClick={() => this.onClickHandle(movie._id)} >Remove from favourite</Button>
-        </Card.Body>
-        </Card>
-      );
-    }
+{
+const { movie} = this.props;
+return (
+  <Card style={{width:'16rem'}}>
+    <Card.Img variant="top" src={process.env.PUBLIC_URL + "/images/" + movie.ImagePath}/>
+    <Card.Body>
+      <Card.Title>
+        {movie.Title}
+        <span
+        onClick={() => this.toggleClass()}
+        className={this.state.fav ? "favme active" : "favme"}  >
+        &#x2605;
+        </span>
+      </Card.Title>
+      <Card.Text>{movie.Description}</Card.Text>
+      <Link to={`/movies/${movie._id}`}>
+      <Button  variant="link">Open</Button>
+      </Link>
+    </Card.Body>
+  </Card>
+    );
+  }
 }
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string
   }).isRequired,
+  onClick: PropTypes.func.isRequired
 };

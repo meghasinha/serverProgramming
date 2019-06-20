@@ -28,7 +28,8 @@ class MainView extends React.Component
     this.state =
     {
       token:null,
-      user:null
+      user:null,
+       userInfo: {}
     };
   }
 
@@ -58,6 +59,35 @@ class MainView extends React.Component
     this.getMovies(authData.token);
   }
 
+  updateUser(data) {
+      this.setState({
+        userInfo: data
+      });
+      localStorage.setItem('user', data.Username);
+  }
+
+
+  addToFavorites(movie) {
+    //https://stackoverflow.com/questions/43040721/how-to-update-nested-state-properties-in-react
+    let favorites = this.state.userInfo.Movies;
+    if (favorites.indexOf(movie) < 0) {
+      favorites.push(movie);
+    }
+
+    let userInfo = {...this.state.userInfo};
+    userInfo.Movies = favorites;
+this.setState({userInfo});
+}
+
+  removeFromFavorites(movieId) {
+      let currFavorites = this.state.userInfo.Movies;
+    let favorites = currFavorites.filter(mId => {
+      return mId !== movieId
+    });
+    let userInfo = {...this.state.userInfo};
+    userInfo.Movies = favorites;
+this.setState({userInfo});
+}
   getMovies(token)
   {
     axios.get('https://mymovieflix.herokuapp.com/movies',
@@ -132,7 +162,10 @@ class MainView extends React.Component
         <Button  className="profile" variant="Primary">Profile</Button>
         </Link>
         <div>
-          <MoviesList/>
+          <MoviesList
+          addToFavorites={this.addToFavorites}
+          removeFromFavorites={this.removeFromFavorites}
+          />
         </div>
       </div>
       );}
@@ -141,9 +174,6 @@ class MainView extends React.Component
     <Route path="/register" render={() => <RegistrationView />} />
 
     <Route path="/movies/:id" render={({match}) => <MovieView movieId={match.params.id}/>}/>
-
-    <Route  path="/genres/:name"  render={({ match }) =>
-    <GenreView genreName={match.params.name} />}/>
 
     <Route  path="/directors/:name" render={({ match }) =>
     <DirectorView directorName={match.params.name} />}/>
@@ -162,5 +192,4 @@ class MainView extends React.Component
     );
   }
   }
-
 export default connect(null, { setMovies,setUser } )(MainView);

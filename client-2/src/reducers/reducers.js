@@ -43,6 +43,7 @@ const moviesApp = combineReducers({
   sortColumn,
   movies,
   userData
+
 });
 
 

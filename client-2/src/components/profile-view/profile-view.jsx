@@ -21,7 +21,7 @@ import Button from 'react-bootstrap/Button';
               <Card.Title>Username</Card.Title>
               <Card.Text>{user.Username}</Card.Text>
               <Card.Title>Password</Card.Title>
-              <Card.Text>{user.Password}</Card.Text>
+              <Card.Text>*****</Card.Text>
               <Card.Title>Birthday</Card.Title>
               <Card.Text>{user.Birthday}</Card.Text>
               <Card.Title>Email</Card.Title>

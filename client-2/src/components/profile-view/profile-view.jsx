@@ -11,11 +11,10 @@ import Button from 'react-bootstrap/Button';
     if (!userData || !userData.length) return null;
     const user = userData.find(m => m.Username === props.userProfile);
 
-    return (
-          <div>
+  return (
+        <div>
             <img src={require('../../movie_logo.svg')}  className= "logo" width="100" height="50"/>
             <p className="update"><Link to={`./update/${props.userProfile}`}>Profile Update</Link></p>
-            <Button className="logOut"onClick={() => this.logOut()} variant="link">Logout</Button>
             <Card style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Title>Username</Card.Title>
